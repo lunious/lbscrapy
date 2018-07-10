@@ -43,8 +43,8 @@ class SggjyzbjgSpider(RedisSpider):
             if self.page < pageCount:
                 self.page += 1
 
-            yield scrapy.Request(url=self.url + '&page=' + str(self.page) + '&parm=' + str(self.timestamp))
-
+            yield scrapy.Request(url=self.url + '&page=' + str(self.page) + '&parm=' + str(self.timestamp),
+                                 callback=self.list_parse)
 
     def detail_parse(self, response):
         item = response.meta['meta']
