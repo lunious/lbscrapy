@@ -60,78 +60,32 @@ class SggjyzbjgSpider(RedisSpider):
         placeTime = Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[1]//tr[5]/td[4]/text()').extract()
         publicityPeriod = Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[1]//tr[6]/td[2]/text()').extract()
         bigPrice = Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[1]//tr[6]/td[4]/text()').extract()
-        if Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[2]/td[2]/text()').extract():
-            one = Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[2]/td[2]/text()').extract()
-        elif Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[2]/td/text()').extract():
-            one = Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[2]/td/text()').extract()
+
+        oneTree = Selector(text=res[0].strip()).xpath('//div[@class="tablediv"]/table[2]//tr[2]//text()')
+        content1 = ''
+        for i in oneTree.extract():
+            content1 += i.strip() + '_'
+        if content1.startswith('_'):
+            item['oneTree'] = content1[6:-2].replace('__','_')
         else:
-            one = '/'
-        if Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[2]/td[3]/text()').extract():
-            one_1 = Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[2]/td[3]/text()').extract()
-        elif Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[2]/th[2]/text()').extract():
-            one_1 = Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[2]/th[2]/text()').extract()
+            item['oneTree'] = content1[4:-2]
+        twoTree = Selector(text=res[0].strip()).xpath('//div[@class="tablediv"]/table[2]//tr[3]//text()')
+        content2 = ''
+        for i in twoTree.extract():
+            content2 += i.strip() + '_'
+        if content2.startswith('_'):
+            item['twoTree'] = content1[6:-2].replace('__', '_')
         else:
-            one_1 = '/'
-        if Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[2]/td[4]/text()').extract():
-            one_2 = Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[2]/td[4]/text()').extract()
-        elif Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[2]/th[3]/text()').extract():
-            one_2 = Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[2]/th[3]/text()').extract()
+            item['twoTree'] = content2[4:-2]
+        threeTree = Selector(text=res[0].strip()).xpath('//div[@class="tablediv"]/table[2]//tr[4]//text()')
+        content3 = ''
+        for i in threeTree.extract():
+            content3 += i.strip() + '_'
+        if content3.startswith('_'):
+            item['threeTree'] = content1[6:-2].replace('__', '_')
         else:
-            one_2 = '/'
-        if Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[2]/td[5]/text()').extract():
-            one_3 = Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[2]/td[5]/text()').extract()
-        elif Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[2]/th[4]/text()').extract():
-            one_3 = Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[2]/th[4]/text()').extract()
-        else:
-            one_3 = '/'
-        if Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[3]/td[2]/text()').extract():
-            two = Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[3]/td[2]/text()').extract()
-        elif Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[3]/td/text()').extract():
-            two = Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[3]/td/text()').extract()
-        else:
-            two = '/'
-        if Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[3]/td[3]/text()').extract():
-            two_1 = Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[3]/td[3]/text()').extract()
-        elif Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[3]/th[2]/text()').extract():
-            two_1 = Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[3]/th[2]/text()').extract()
-        else:
-            two_1 = '/'
-        if Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[3]/td[4]/text()').extract():
-            two_2 = Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[3]/td[4]/text()').extract()
-        elif Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[3]/th[3]/text()').extract():
-            two_2 = Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[3]/th[3]/text()').extract()
-        else:
-            two_2 = '/'
-        if Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]/tr[3]/td[4]/text()').extract():
-            two_3 = Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]/tr[3]/td[4]/text()').extract()
-        elif Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]/tr[3]/th[4]/text()').extract():
-            two_3 = Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]/tr[3]/th[4]/text()').extract()
-        else:
-            two_3 = '/'
-        if Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[4]/td[2]/text()').extract():
-            three = Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[4]/td[2]/text()').extract()
-        elif Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[4]/td/text()').extract():
-            three = Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[4]/td/text()').extract()
-        else:
-            three = '/'
-        if Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[4]/td[3]/text()').extract():
-            three_1 = Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[4]/td[3]/text()').extract()
-        elif Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[4]/th[2]/text()').extract():
-            three_1 = Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[4]/th[2]/text()').extract()
-        else:
-            three_1 = '/'
-        if Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]/tr[4]/td[4]/text()').extract():
-            three_2 = Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]/tr[4]/td[4]/text()').extract()
-        elif Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]/tr[4]/th[3]/text()').extract():
-            three_2 = Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]/tr[4]/th[3]/text()').extract()
-        else:
-            three_2 = '/'
-        if Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[4]/td[5]/text()').extract():
-            three_3 = Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[4]/td[5]/text()').extract()
-        elif Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[4]/th[4]/text()').extract():
-            three_3 = Selector(text=res[0]).xpath('//div[@class="tablediv"]/table[2]//tr[4]/th[4]/text()').extract()
-        else:
-            three_3 = '/'
+            item['threeTree'] = content2[4:-2]
+
         if entryName:
             item['entryName'] = entryName[0]
         else:
@@ -176,16 +130,9 @@ class SggjyzbjgSpider(RedisSpider):
             item['bigPrice'] = bigPrice[0]
         else:
             item['bigPrice'] = ''
-        if one:
-            item['oneTree'] = one[0] + '_' + one_1[0] + '_' + one_2[0] + '_' + one_3[0]
+
+        if item['oneTree'] or item['twoTree'] or item['threeTree']:
+            item['treeCount'] = 3
         else:
-            item['oneTree'] = ''
-        if two:
-            item['twoTree'] = two[0] + '_' + two_1[0] + '_' + two_2[0] + '_' + two_3[0]
-        else:
-            item['twoTree'] = ''
-        if three:
-            item['threeTree'] = three[0] + '_' + three_1[0] + '_' + three_2[0] + '_' + three_3[0]
-        else:
-            item['threeTree'] = ''
+            item['treeCount'] = 0
         yield item

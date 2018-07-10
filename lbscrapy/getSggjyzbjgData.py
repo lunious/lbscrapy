@@ -48,9 +48,10 @@ def process_item(item):
             cursor.execute(
                 "Insert into entryjglist(entryName,sysTime,type,entity,entityId) select reportTitle,sysTime,'工程中标结果','sggjyzbjg',id from sggjyzbjg where id not in(select entityId from entryjglist where  entity ='sggjyzbjg' ) ")
             connect.commit()
+            print('数据插入成功>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
         except Exception as error:
             logging.log(error)
-        return item
+            print('数据插入失败>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
 
 
 def main():
