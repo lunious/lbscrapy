@@ -21,7 +21,7 @@ SCHEDULER = "scrapy_redis.scheduler.Scheduler"
 DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
 # 爬虫停止后，保留／清理Redis中的请求队列以及去重集合
 # True：保留，False：清理，默认为False
-SCHEDULER_PERSIST = True
+SCHEDULER_PERSIST = False
 # 延迟2秒
 DOWNLOAD_DELAY = 2
 # Disable cookies (enabled by default)
